@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="Diffusion Prior-Based Amortized Variational Inference for Noisy Inverse Problems"
+    />
+    <meta name="keywords" content="DAVI, inverse problems, amortization" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DAVI</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+
+      gtag('config', 'G-PYVRSFMDRL');
+    </script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css" />
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+    />
+    <link rel="stylesheet" href="./static/css/index.css" />
+    <link rel="icon" href="./static/images/mlv_logo.png" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+    <script src="./static/js/quality_ours.js"></script>
+  </head>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title">
+                Diffusion Prior-Based Amortized Variational Inference for Noisy
+                Inverse Problems
+              </h1>
+              <div class="columns is-centered has-text-centered">
+                <h3 class="title is-4 publication-venue">ECCV 2024 🇮🇹</h3>
+              </div>
+              <div class="columns is-centered has-text-centered">
+                <h3 class="title is-4 publication-awards">Oral presentation</h3>
+              </div>
+
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">Sojin Lee<sup>*</sup>,</span>
+                <span class="author-block">Dogyun Park<sup>*</sup>,</span>
+                <span class="author-block">Inho Kong<sup></sup>,</span>
+                <span class="author-block"
+                  >Hyunwoo J. Kim<sup>&dagger;</sup>,</span
+                >
+              </div>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">Korea University</span>
+              </div>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <a href="https://mlv.korea.ac.kr/">MLV Lab</a>
+                </span>
+              </div>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block"
+                  >* Equal Contributions, &dagger; Corresponding Author</span
+                >
+              </div>
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- PDF Link -->
+                  <span class="link-block">
+                    <a
+                      href="https://www.arxiv.org/pdf/2407.16125"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+                  <!-- Code Link. -->
+                  <span class="link-block">
+                    <a
+                      href="https://github.com/mlvlab/DAVI"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon"><i class="fab fa-github"></i></span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <video id="teaser" autoplay muted loop playsinline height="100%">
+            <source src="./static/videos/DAVI_framework.mp4" type="video/mp4" />
+          </video>
+          <h2 class="subtitle has-text-centered">
+            <span class="dnerf">DAVI</span>'s an alternative optimization
+            procedure.
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Recent studies on inverse problems have proposed posterior
+                samplers that leverage the pre-trained diffusion models as
+                powerful priors. These attempts have paved the way for using
+                diffusion models in a wide range of inverse problems. However,
+                the existing methods entail computationally demanding iterative
+                sampling procedures and optimize a separate solution for each
+                measurement, which leads to limited scalability and lack of
+                generalization capability across unseen samples.
+              </p>
+
+              <p>
+                To address these limitations, we propose a novel approach,
+                Diffusion prior-based Amortized Variational Inference (<span
+                  class="dnerf"
+                  >DAVI</span
+                >) that solves inverse problems with a diffusion prior from an
+                amortized variational inference perspective.
+              </p>
+
+              <p>
+                Specifically, instead of separate measurement-wise optimization,
+                our amortized inference learns a function that directly maps
+                measurements to the implicit posterior distributions of
+                corresponding clean data, enabling a single-step posterior
+                sampling even for unseen measurements.
+              </p>
+
+              <p>
+                Extensive experiments on image restoration tasks, e.g., Gaussian
+                deblur, 4× super-resolution, and box inpainting with two
+                benchmark datasets, demonstrate our approach’s superior
+                performance over strong baselines.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!--/ Abstract. -->
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <!-- Silder -->
+          <div class="column">
+            <div class="content">
+              <h2 class="title is-3">Qualitative Results of FFHQ</h2>
+              <div class="task-buttons">
+                <button class="task-button" onclick="selectTask(0)">
+                  Gaussian deblur
+                </button>
+                <button class="task-button" onclick="selectTask(1)">
+                  4X SR
+                </button>
+                <button class="task-button" onclick="selectTask(2)">
+                  Box inpainting
+                </button>
+                <button class="task-button" onclick="selectTask(3)">
+                  Denoising
+                </button>
+                <button class="task-button" onclick="selectTask(4)">
+                  Colorization
+                </button>
+              </div>
+
+              <!-- Image Pair Container -->
+              <div class="image-pair-container">
+                <button
+                  class="slider-large-arrow leftside"
+                  onclick="prevImage()"
+                >
+                  &#10094;
+                </button>
+                <button
+                  class="slider-large-arrow rightside"
+                  onclick="nextImage()"
+                >
+                  &#10095;
+                </button>
+
+                <div class="fixed-image" id="fixedImage"></div>
+                <div class="slide-container">
+                  <div class="slide-image" id="slideImageLeft"></div>
+                  <div class="slide-image overlay" id="slideImageRight"></div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="50"
+                    class="slider"
+                    id="slider"
+                  />
+                  <div class="slider-handle">
+                    <span class="slider-arrow left-arrow">❮</span>
+                    <span class="slider-arrow right-arrow">❯</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Dots for navigation -->
+              <div class="dots-navigation">
+                <span class="dot" onclick="selectImage(0)"></span>
+                <span class="dot" onclick="selectImage(1)"></span>
+                <span class="dot" onclick="selectImage(2)"></span>
+                <span class="dot" onclick="selectImage(3)"></span>
+                <span class="dot" onclick="selectImage(4)"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <!-- Silder -->
+          <div class="column">
+            <div class="content">
+              <h2 class="title is-3">Qualitative Results of ImageNet</h2>
+              <div class="task-buttons">
+                <button class="task-button" onclick="selectTask_imgnet(0)">
+                  Gaussian deblur
+                </button>
+                <button class="task-button" onclick="selectTask_imgnet(1)">
+                  4X SR
+                </button>
+                <button class="task-button" onclick="selectTask_imgnet(2)">
+                  Box inpainting
+                </button>
+                <button class="task-button" onclick="selectTask_imgnet(3)">
+                  Denoising
+                </button>
+                <button class="task-button" onclick="selectTask_imgnet(4)">
+                  Colorization
+                </button>
+              </div>
+
+              <!-- Image Pair Container -->
+              <div class="image-pair-container">
+                <button
+                  class="slider-large-arrow leftside"
+                  onclick="prevImage_imgnet()"
+                >
+                  &#10094;
+                </button>
+                <button
+                  class="slider-large-arrow rightside"
+                  onclick="nextImage_imgnet()"
+                >
+                  &#10095;
+                </button>
+
+                <div class="fixed-image" id="fixedImage_imgnet"></div>
+                <div class="slide-container">
+                  <div class="slide-image" id="slideImageLeft_imgnet"></div>
+                  <div
+                    class="slide-image overlay"
+                    id="slideImageRight_imgnet"
+                  ></div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="50"
+                    class="slider"
+                    id="slider_imgnet"
+                  />
+                  <div class="slider-handle">
+                    <span class="slider-arrow left-arrow">❮</span>
+                    <span class="slider-arrow right-arrow">❯</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Dots for navigation -->
+              <div class="dots-navigation">
+                <span class="dotimgnet" onclick="selectImage_imgnet(0)"></span>
+                <span class="dotimgnet" onclick="selectImage_imgnet(1)"></span>
+                <span class="dotimgnet" onclick="selectImage_imgnet(2)"></span>
+                <span class="dotimgnet" onclick="selectImage_imgnet(3)"></span>
+                <span class="dotimgnet" onclick="selectImage_imgnet(4)"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <h2 class="title">BibTeX</h2>
+        <pre><code>@article{lee2024diffusion,
+    title={Diffusion Prior-Based Amortized Variational Inference for Noisy Inverse Problems},
+    author={Lee, Sojin and Park, Dogyun and Kong, Inho and Kim, Hyunwoo J},
+    journal={arXiv preprint arXiv:2407.16125},
+    year={2024}
+}</code></pre>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p>
+                This website is licensed under a
+                <a
+                  rel="license"
+                  href="http://creativecommons.org/licenses/by-sa/4.0/"
+                  >Creative Commons Attribution-ShareAlike 4.0 International
+                  License</a
+                >.
+              </p>
+              <p>
+                This means you are free to borrow the
+                <a href="https://github.com/nerfies/nerfies.github.io"
+                  >source code</a
+                >
+                of this website, we just ask that you link back to this page in
+                the footer. Please remember to remove the analytics code
+                included in the header of the website which you do not want on
+                your website.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
