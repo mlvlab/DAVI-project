@@ -4,6 +4,7 @@ body {
 
 .titleInline {
   flex-wrap: nowrap;
+  display: inline-block;
 }
 
 .task-buttons {
@@ -29,8 +30,7 @@ body {
   max-width: 200px;
   box-sizing: border-box;
   text-align: center;
-  /* flex: 1 1 auto; */
-  /* font-size: 1.2vw; */
+  display: inline-block;
 }
 
 
@@ -319,19 +319,20 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 300px;
   margin-right: 10px;
   font-size: 1.5vw; 
   margin-bottom: 20px;
   position: relative;
+  height: 50vw; 
+  max-height: 300px; 
 }
 
 .y-label {
   font-size: 14px;
   text-align: right;
   position: absolute;
-  left: -40px;
   font-weight: bold;
+  z-index: 100;
 }
 
 .y-label:nth-child(1) {
@@ -364,7 +365,7 @@ body {
 @media (max-width: 768px) {
   .task-buttons {
     flex: 1 1 100%;
-}
+  }
   
   .chart {
       height: 60vw;
