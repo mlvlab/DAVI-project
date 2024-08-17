@@ -205,6 +205,8 @@ body {
   margin-top: 50px;
   font-size: 18px;
   color: #333;
+  white-space: normal; 
+  overflow: visible;
 }
 
 #caption.highlight {
