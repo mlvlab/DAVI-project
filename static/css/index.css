@@ -2,6 +2,10 @@ body {
   font-family: 'Noto Sans', sans-serif;
 }
 
+.titleInline {
+  flex-wrap: nowrap;
+}
+
 .task-buttons {
   display: flex;
   margin-bottom: 20px;
@@ -17,13 +21,16 @@ body {
   padding: 10px 30px;
   margin: 0 3px;
   cursor: pointer;
-  font-size: 18px;
+  /* font-size: 18px; */
   font-weight: bold;
   border-radius: 15px;
   color: white;
   text-align: center;
-  width: 180px;
+  max-width: 200px;
   box-sizing: border-box;
+  text-align: center;
+  /* flex: 1 1 auto; */
+  /* font-size: 1.2vw; */
 }
 
 
@@ -174,7 +181,7 @@ body {
 }
 
 .chart-container {
-  width: 70%;
+  width: 80%;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -187,6 +194,8 @@ body {
   display: flex;
   align-items: flex-end;
   position: relative;
+  width: 80%;
+  max-width: 100%;
 }
 
 .chart-title {
@@ -197,7 +206,7 @@ body {
 }
 
 .chart-caption {
-  font-size: 18px;
+  font-size: 2vw;
   white-space: nowrap; 
 }
 
@@ -205,6 +214,7 @@ body {
   margin-top: 50px;
   font-size: 18px;
   color: #333;
+  font-weight: bold;
   white-space: normal; 
   overflow: visible;
 }
@@ -214,11 +224,13 @@ body {
   font-weight: bold;
   transition: color 0.3s ease;
 }
+
 .chart {
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
-  height: 300px;
+  height: 50vw; 
+  max-height: 300px; 
   width: 100%;
   border-left: 3px solid #333;
   border-bottom: 3px solid #333;
@@ -309,6 +321,7 @@ body {
   justify-content: space-between;
   height: 300px;
   margin-right: 10px;
+  font-size: 1.5vw; 
   margin-bottom: 20px;
   position: relative;
 }
@@ -346,6 +359,35 @@ body {
 .y-label:nth-child(5) {
   bottom: 0; 
   right: -20%;
+}
+
+@media (max-width: 768px) {
+  .task-buttons {
+    flex: 1 1 100%;
+}
+  
+  .chart {
+      height: 60vw;
+  }
+
+  .bar::before {
+      font-size: 3vw;
+  }
+
+  .bar::after {
+      font-size: 2vw;
+      transform: translateX(-50%) rotate(-45deg); 
+      text-align: left;
+  }
+
+  .chart-caption {
+      font-size: 3vw; 
+  }
+
+  .y-axis {
+      font-size: 2vw;
+      width: 50px;
+  }
 }
 
 .footer .icon-link {
