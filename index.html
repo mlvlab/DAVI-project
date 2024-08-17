@@ -49,6 +49,8 @@
     <script src="./static/js/bulma-slider.min.js"></script>
     <script src="./static/js/index.js"></script>
     <script src="./static/js/quality_ours.js"></script>
+    <script src="./static/js/bar.js"></script>
+
   </head>
   <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -75,13 +77,8 @@
                 Diffusion Prior-Based Amortized Variational Inference for Noisy
                 Inverse Problems
               </h1>
-              <div class="columns is-centered has-text-centered">
-                <h3 class="title is-4 publication-venue">ECCV 2024 🇮🇹</h3>
-              </div>
-              <div class="columns is-centered has-text-centered">
-                <h3 class="title is-4 publication-awards">Oral presentation</h3>
-              </div>
-
+              <div class="is-size-3 publication-authors">ECCV 2024 🇮🇹</div>
+              <div class="is-size-3 publication-authors">Oral presentation</div>
               <div class="is-size-5 publication-authors">
                 <span class="author-block">Sojin Lee<sup>*</sup>,</span>
                 <span class="author-block">Dogyun Park<sup>*</sup>,</span>
@@ -133,6 +130,14 @@
       </div>
     </section>
 
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <img src="static/images/davi_main.png"/>
+        </div>
+      </div>
+    </section>
+
     <section class="hero teaser">
       <div class="container is-max-desktop">
         <div class="hero-body">
@@ -140,7 +145,7 @@
             <source src="./static/videos/DAVI_framework.mp4" type="video/mp4" />
           </video>
           <h2 class="subtitle has-text-centered">
-            <span class="dnerf">DAVI</span>'s alternative optimization
+            <span class="dnerf">DAVI</span>'s the alternative optimization
             procedure.
           </h2>
         </div>
@@ -342,6 +347,42 @@
       </div>
     </section>
 
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <!-- Silder -->
+          <div class="column">
+            <div class="content">
+              <h2 class="title is-3">Comparison with Baselines</h2>
+              <!-- Bar graph -->
+                <div class="chart-container">
+                  <h4 class="chart-title">NFEs for Inference</h2>
+                  <div class="chart-wrapper">
+                    <div class="y-axis">
+                      <div class="y-label">NFEs</div>
+                      <div class="y-label">1000</div>
+                      <div class="y-label">100</div>
+                      <div class="y-label">10</div>
+                      <div class="y-label">1</div>
+                    </div>
+                  <div class="chart">
+                    <div class="bar ourbar" data-label="DAVI" data-value="1"><div class="bar-marker"></div></div>
+                    <div class="bar" data-label="DDRM" data-value="20"></div>
+                    <div class="bar" data-label="DDNM+" data-value="100"></div>
+                    <div class="bar" data-label="DPS" data-value="1000"></div>
+                    <div class="bar" data-label="&Pi;GDM" data-value="100"></div>
+                    <div class="bar" data-label="DiffPIR" data-value="100"></div>
+                    <div class="bar" data-label="RED-diff" data-value="1000"></div>
+                  </div>
+                </div>
+                <p id="caption" class="chart-caption">DAVI performs a single-step inference (x20~100 faster).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="BibTeX">
       <div class="container is-max-desktop content">
         <h2 class="title">BibTeX</h2>
@@ -358,6 +399,10 @@
         <div class="columns is-centered">
           <div class="column is-8">
             <div class="content">
+              <p>We adapted the source code of
+                <a href="https://github.com/nerfies/nerfies.github.io"
+                  >nerfies</a>.
+                  You are free to use this website, but we just ask that you include a link back to this page in the footer.</p>
               <p>
                 This website is licensed under a
                 <a
@@ -366,16 +411,6 @@
                   >Creative Commons Attribution-ShareAlike 4.0 International
                   License</a
                 >.
-              </p>
-              <p>
-                This means you are free to borrow the
-                <a href="https://github.com/nerfies/nerfies.github.io"
-                  >source code</a
-                >
-                of this website, we just ask that you link back to this page in
-                the footer. Please remember to remove the analytics code
-                included in the header of the website which you do not want on
-                your website.
               </p>
             </div>
           </div>
