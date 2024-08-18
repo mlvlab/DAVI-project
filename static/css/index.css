@@ -125,14 +125,13 @@ body {
   font-weight: bold;
   padding: 0 15px;
   box-sizing: border-box;
-  font-size: 25px;
+  font-size: calc(1.2rem + 0.5vw); 
 }
 
 .on-label {
   color: white;
   flex: 0 0 50%;
   text-align: left; 
-  /* padding-left: 10px; */
   z-index: 1; 
   transition: color 0.1s ease;
 }
@@ -141,7 +140,6 @@ body {
   color: #ee6c97;
   flex: 0 0 50%; 
   text-align: left; 
-  /* padding-right: 10px; */
   z-index: 1; 
   transition: color 0.1s ease;
 }
