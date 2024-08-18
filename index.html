@@ -280,19 +280,19 @@
             <div class="content">
               <h2 class="title is-3-titleInline">Qualitative Results of ImageNet</h2>
               <div class="task-buttons">
-                <button class="task-button" onclick="selectTask_imgnet(0)">
+                <button class="task-button-imgnet" onclick="selectTask_imgnet(0)">
                   Gaussian deblur
                 </button>
-                <button class="task-button" onclick="selectTask_imgnet(1)">
+                <button class="task-button-imgnet" onclick="selectTask_imgnet(1)">
                   4X SR
                 </button>
-                <button class="task-button" onclick="selectTask_imgnet(2)">
+                <button class="task-button-imgnet" onclick="selectTask_imgnet(2)">
                   Box inpainting
                 </button>
-                <button class="task-button" onclick="selectTask_imgnet(3)">
+                <button class="task-button-imgnet" onclick="selectTask_imgnet(3)">
                   Denoising
                 </button>
-                <button class="task-button" onclick="selectTask_imgnet(4)">
+                <button class="task-button-imgnet" onclick="selectTask_imgnet(4)">
                   Colorization
                 </button>
               </div>
@@ -350,14 +350,13 @@
     <section class="section">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
-          <!-- Silder -->
           <div class="column">
             <div class="content">
               <h2 class="title is-3-titleInline">Comparison with Baselines</h2>
               <!-- Bar graph -->
-                <div class="chart-container">
-                  <h4 class="chart-title">NFEs for Inference</h2>
-                  <div class="chart-wrapper">
+              <div class="chart-container">
+                <h4 class="chart-title">NFEs for Inference</h2>
+                <div class="chart-wrapper">
                   <div class="chart">
                     <div class="bar ourbar" data-label="DAVI" data-value="1"><div class="bar-marker"></div></div>
                     <div class="bar" data-label="DDRM" data-value="20"></div>
@@ -369,7 +368,61 @@
                   </div>
                 </div>
                 <p id="caption" class="chart-caption">DAVI performs a single-step inference (x20~100 faster).</p>
+                <p>This graph shows the Number of Function Evaluations (NFEs) required for inference, <br>plotted on a logarithmic scale to highlight differences across varying magnitudes.</p>
               </div>
+            <h2></h2>
+            <!-- On/Off Switch -->
+            <div class="switch-container">
+              <label class="switch">
+                <input type="checkbox" id="modeToggle" onchange="toggleMode()">
+                <span class="slider-switch">
+                  <span class="slider-labels">
+                    <span class="on-label">FFHQ</span>
+                    <span class="off-label">ImageNet</span>
+                  </span>
+                </span>
+              </label>
+            </div>
+            <!--Task Buttons-->
+            <div class="task-buttons">
+              <button class="task-button-onoff" onclick="selectTask_onoff(0)">
+                Gaussian deblur
+              </button>
+              <button class="task-button-onoff" onclick="selectTask_onoff(1)">
+                4X SR
+              </button>
+              <button class="task-button-onoff" onclick="selectTask_onoff(2)">
+                Box inpainting
+              </button>
+              <button class="task-button-onoff" onclick="selectTask_onoff(3)">
+                Denoising
+              </button>
+              <button class="task-button-onoff" onclick="selectTask_onoff(4)">
+                Colorization
+              </button>
+            </div>
+            <!-- Image Pair Container -->
+            <div class="image-comparison-container">
+              <button
+                class="slider-comparison leftside-comparison"
+                onclick="prevImage_onoff()"
+              >
+                &#10094;
+              </button>
+              <div class="fixed-comparison" id="fixedImage_onoff"></div>
+              <button
+                class="slider-comparison rightside-comparison"
+                onclick="nextImage_onoff()"
+              >
+                &#10095;
+              </button>
+            </div>
+            <!-- Dots for navigation -->
+            <div class="dots-navigation">
+              <span class="dotonoff" onclick="selectImage_onoff(0)"></span>
+              <span class="dotonoff" onclick="selectImage_onoff(1)"></span>
+              <span class="dotonoff" onclick="selectImage_onoff(2)"></span>
+            </div>
             </div>
           </div>
         </div>

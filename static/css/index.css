@@ -15,7 +15,7 @@ body {
   justify-content: space-between; 
 }
 
-.task-button {
+.task-button, .task-button-imgnet, .task-button-onoff {
   flex: 1 1 auto;
   background-color: hwb(217 26% 15% / 0.968);
   border: none;
@@ -30,8 +30,12 @@ body {
   box-sizing: border-box;
   text-align: center;
   display: inline-block;
+  transition: color 0.1s ease;
 }
 
+.task-button.active, .task-button-imgnet.active, .task-button-onoff.active {
+  color: black;
+}
 
 .navigation-buttons {
   display: flex;
@@ -49,6 +53,105 @@ body {
   aspect-ratio: 2 / 1;
   margin: 0 auto;
   border: none;
+}
+
+.image-comparison-container {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  width: 100%;
+  height: auto;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.fixed-comparison {
+  flex-grow: 1; 
+  height: 400px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.switch-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 70%;
+  max-width: 400px;
+  height: 75px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider-switch {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ee6c97;
+  transition: 0.2s;
+  border-radius: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.slider-labels {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  font-weight: bold;
+  padding: 0 15px;
+  box-sizing: border-box;
+  font-size: 25px;
+}
+
+.on-label {
+  color: white;
+  position: absolute;
+  left: 15%; 
+}
+
+.off-label {
+  color: #ee6c97;
+  position: absolute;
+  right: 15%; 
+}
+
+.slider-switch:before {
+  display:none;
+}
+
+input:checked + .slider-switch {
+  background-color: #5cacf8; 
+}
+
+input:checked ~ .slider-switch .on-label {
+  color: #5cacf8;
+}
+
+input:checked ~ .slider-switch .off-label {
+  color: white; 
 }
 
 .fixed-image,
@@ -110,6 +213,28 @@ body {
   cursor: pointer;
 }
 
+.slider-comparison {
+  position: absolute;
+  top: 50%; 
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  z-index: 10;
+} 
+
+
 .slider-arrow {
   font-size: 15px;
   color: #333;
@@ -129,8 +254,18 @@ body {
   left: 10px;
 }
 
+.leftside-comparison {
+  /* left: -70px; */
+  left: 0;
+}
+
 .rightside {
   right: 10px;
+}
+
+.rightside-comparison {
+  /* right: -70px; */
+  right: 0;
 }
 
 .leftside,
@@ -160,7 +295,8 @@ body {
 }
 
 .dot,
-.dotimgnet {
+.dotimgnet,
+.dotonoff {
   height: 15px;
   width: 15px;
   margin: 0 5px;
@@ -171,11 +307,16 @@ body {
   transition: background-color 0.3s;
 }
 
+
 .dot.active {
   background-color: hwb(217 26% 15% / 0.968);
 }
 
 .dotimgnet.active {
+  background-color: hwb(217 26% 15% / 0.968);
+}
+
+.dotonoff.active {
   background-color: hwb(217 26% 15% / 0.968);
 }
 

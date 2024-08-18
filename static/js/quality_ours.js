@@ -5,6 +5,19 @@ $(document).ready(function () {
   let currentTask_imgnet = 0;
   let currentImageIndex_imgnet = 0;
 
+  let currentTask_onoff = 0;
+  let currentImageIndex_onoff = 0;
+  let mode = 'FFHQ';
+
+  const buttons = document.querySelectorAll('.task-button');
+  buttons[0].classList.add('active');
+
+  const buttons_imgnet = document.querySelectorAll('.task-button-imgnet');
+  buttons_imgnet[0].classList.add('active');
+
+  const buttons_onoff = document.querySelectorAll('.task-button-onoff');
+  buttons_onoff[0].classList.add('active');
+
   const tasks = {
     0: [
       {
@@ -281,6 +294,43 @@ $(document).ready(function () {
     ],
   };
 
+  const tasks_onoff = {
+    FFHQ: {
+      0: ['static/images/quality_comparison/ffhq/gauss_deblur/0.png',
+          'static/images/quality_comparison/ffhq/gauss_deblur/1.png',
+          'static/images/quality_comparison/ffhq/gauss_deblur/2.png'],
+      1: ['static/images/quality_comparison/ffhq/sr4/0.png',
+        'static/images/quality_comparison/ffhq/sr4/1.png',
+        'static/images/quality_comparison/ffhq/sr4/2.png'],
+      2: ['static/images/quality_comparison/ffhq/boxinpaint/0.png',
+        'static/images/quality_comparison/ffhq/boxinpaint/1.png',
+        'static/images/quality_comparison/ffhq/boxinpaint/2.png'],
+      3: ['static/images/quality_comparison/ffhq/deno/0.png',
+        'static/images/quality_comparison/ffhq/deno/1.png',
+        'static/images/quality_comparison/ffhq/deno/2.png'],
+      4: ['static/images/quality_comparison/ffhq/color/0.png',
+        'static/images/quality_comparison/ffhq/color/1.png',
+        'static/images/quality_comparison/ffhq/color/2.png'],    
+      },
+    ImageNet: {
+      0: ['static/images/quality_comparison/imagenet/gauss_deblur/0.png',
+          'static/images/quality_comparison/imagenet/gauss_deblur/1.png',
+          'static/images/quality_comparison/imagenet/gauss_deblur/2.png'],
+      1: ['static/images/quality_comparison/imagenet/sr4/0.png',
+        'static/images/quality_comparison/imagenet/sr4/1.png',
+        'static/images/quality_comparison/imagenet/sr4/2.png'],
+      2: ['static/images/quality_comparison/imagenet/boxinpaint/0.png',
+        'static/images/quality_comparison/imagenet/boxinpaint/1.png',
+        'static/images/quality_comparison/imagenet/boxinpaint/2.png'],
+      3: ['static/images/quality_comparison/imagenet/deno/0.png',
+        'static/images/quality_comparison/imagenet/deno/1.png',
+        'static/images/quality_comparison/imagenet/deno/2.png'],
+      4: ['static/images/quality_comparison/imagenet/color/0.png',
+        'static/images/quality_comparison/imagenet/color/1.png',
+        'static/images/quality_comparison/imagenet/color/2.png'],    
+      },
+  };
+
   function updateImages() {
     const fixedImage = $('#fixedImage');
     const slideImageLeft = $('#slideImageLeft');
@@ -328,16 +378,47 @@ $(document).ready(function () {
     $(`.dotimgnet:eq(${currentImageIndex_imgnet})`).addClass('active');
   }
 
+  function updateImages_onoff() {
+    const fixedImage = $('#fixedImage_onoff');
+
+    const currentImages = tasks_onoff[mode][currentTask_onoff];
+    const currentImage = currentImages[currentImageIndex_onoff];
+
+    fixedImage.css('background-image', `url(${currentImage})`);
+
+    // Update dot selection
+    $('.dotonoff').removeClass('active');
+    $(`.dotonoff:eq(${currentImageIndex_onoff})`).addClass('active');
+  }
+
   function selectTask(taskNumber) {
     currentTask = taskNumber;
     currentImageIndex = 0;
     updateImages();
+
+    const buttons = document.querySelectorAll('.task-button');
+    buttons.forEach(button => button.classList.remove('active'));
+    buttons[taskNumber].classList.add('active');
   }
 
   function selectTask_imgnet(taskNumber) {
     currentTask_imgnet = taskNumber;
     currentImageIndex_imgnet = 0;
     updateImages_imgnet();
+
+    const buttons_imgnet = document.querySelectorAll('.task-button-imgnet');
+    buttons_imgnet.forEach(button => button.classList.remove('active'));
+    buttons_imgnet[taskNumber].classList.add('active');
+  }
+
+  function selectTask_onoff(taskNumber) {
+    currentTask_onoff = taskNumber;
+    currentImageIndex_onoff = 0;
+    updateImages_onoff();
+
+    const buttons_onoff = document.querySelectorAll('.task-button-onoff');
+    buttons_onoff.forEach(button => button.classList.remove('active'));
+    buttons_onoff[taskNumber].classList.add('active');
   }
 
   function selectImage(index) {
@@ -348,6 +429,11 @@ $(document).ready(function () {
   function selectImage_imgnet(index) {
     currentImageIndex_imgnet = index;
     updateImages_imgnet();
+  }
+
+  function selectImage_onoff(index) {
+    currentImageIndex_onoff = index;
+    updateImages_onoff();
   }
 
   function prevImage() {
@@ -366,6 +452,14 @@ $(document).ready(function () {
     updateImages_imgnet();
   }
 
+  function prevImage_onoff() {
+    currentImageIndex_onoff =
+      currentImageIndex_onoff === 0
+        ? tasks_onoff[mode][currentTask_onoff].length - 1
+        : currentImageIndex_onoff - 1;
+    updateImages_onoff();
+  }
+
   function nextImage() {
     currentImageIndex =
       currentImageIndex === tasks[currentTask].length - 1
@@ -380,6 +474,22 @@ $(document).ready(function () {
         ? 0
         : currentImageIndex_imgnet + 1;
     updateImages_imgnet();
+  }
+
+  function nextImage_onoff() {
+    currentImageIndex_onoff =
+      currentImageIndex_onoff === tasks_onoff[mode][currentTask_onoff].length - 1
+        ? 0
+        : currentImageIndex_onoff + 1;
+    updateImages_onoff();
+  }
+
+  function toggleMode() {
+    mode = mode === 'ImageNet' ? 'FFHQ' : 'ImageNet';
+    $('#modeToggle').text(mode.charAt(0).toUpperCase() + mode.slice(1));
+
+    currentImageIndex_onoff = 0;
+    updateImages_onoff();
   }
 
   $('input.slider').on('input change', function (event) {
@@ -419,6 +529,7 @@ $(document).ready(function () {
   // Initialize with the first task's images
   updateImages();
   updateImages_imgnet();
+  updateImages_onoff();
 
   // Slider control with jQuery
   $('input.slider').on('input change', function (event) {
@@ -440,4 +551,10 @@ $(document).ready(function () {
   window.prevImage_imgnet = prevImage_imgnet;
   window.nextImage_imgnet = nextImage_imgnet;
   window.selectImage_imgnet = selectImage_imgnet;
+
+  window.selectTask_onoff = selectTask_onoff;
+  window.prevImage_onoff = prevImage_onoff;
+  window.nextImage_onoff = nextImage_onoff;
+  window.selectImage_onoff = selectImage_onoff;
+  window.toggleMode = toggleMode;
 });
