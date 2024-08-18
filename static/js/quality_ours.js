@@ -12,10 +12,10 @@ $(document).ready(function () {
   const buttons = document.querySelectorAll('.task-button');
   buttons[0].classList.add('active');
 
-  const buttons_imgnet = document.querySelectorAll('.task-button-imgnet');
+  const buttons_imgnet = document.querySelectorAll('.task-button_imgnet');
   buttons_imgnet[0].classList.add('active');
 
-  const buttons_onoff = document.querySelectorAll('.task-button-onoff');
+  const buttons_onoff = document.querySelectorAll('.task-button_onoff');
   buttons_onoff[0].classList.add('active');
 
   const tasks = {
@@ -406,7 +406,7 @@ $(document).ready(function () {
     currentImageIndex_imgnet = 0;
     updateImages_imgnet();
 
-    const buttons_imgnet = document.querySelectorAll('.task-button-imgnet');
+    const buttons_imgnet = document.querySelectorAll('.task-button_imgnet');
     buttons_imgnet.forEach(button => button.classList.remove('active'));
     buttons_imgnet[taskNumber].classList.add('active');
   }
@@ -416,7 +416,7 @@ $(document).ready(function () {
     currentImageIndex_onoff = 0;
     updateImages_onoff();
 
-    const buttons_onoff = document.querySelectorAll('.task-button-onoff');
+    const buttons_onoff = document.querySelectorAll('.task-button_onoff');
     buttons_onoff.forEach(button => button.classList.remove('active'));
     buttons_onoff[taskNumber].classList.add('active');
   }

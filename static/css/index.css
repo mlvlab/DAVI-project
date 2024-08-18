@@ -15,7 +15,7 @@ body {
   justify-content: space-between; 
 }
 
-.task-button, .task-button-imgnet, .task-button-onoff {
+.task-button, .task-button_imgnet, .task-button_onoff {
   flex: 1 1 auto;
   background-color: hwb(217 26% 15% / 0.968);
   border: none;
@@ -33,7 +33,9 @@ body {
   transition: color 0.1s ease;
 }
 
-.task-button.active, .task-button-imgnet.active, .task-button-onoff.active {
+.task-button.active, 
+.task-button_imgnet.active, 
+.task-button_onoff.active {
   color: black;
 }
 
