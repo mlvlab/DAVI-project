@@ -87,7 +87,7 @@ body {
   position: relative;
   display: inline-block;
   width: 70%;
-  max-width: 400px;
+  max-width: 300px;
   height: 75px;
 }
 
@@ -130,14 +130,20 @@ body {
 
 .on-label {
   color: white;
-  position: absolute;
-  left: 15%; 
+  flex: 0 0 50%;
+  text-align: left; 
+  /* padding-left: 10px; */
+  z-index: 1; 
+  transition: color 0.1s ease;
 }
 
 .off-label {
   color: #ee6c97;
-  position: absolute;
-  right: 15%; 
+  flex: 0 0 50%; 
+  text-align: left; 
+  /* padding-right: 10px; */
+  z-index: 1; 
+  transition: color 0.1s ease;
 }
 
 .slider-switch:before {
@@ -257,7 +263,6 @@ input:checked ~ .slider-switch .off-label {
 }
 
 .leftside-comparison {
-  /* left: -70px; */
   left: 0;
 }
 
@@ -266,7 +271,6 @@ input:checked ~ .slider-switch .off-label {
 }
 
 .rightside-comparison {
-  /* right: -70px; */
   right: 0;
 }
 
@@ -309,16 +313,9 @@ input:checked ~ .slider-switch .off-label {
   transition: background-color 0.3s;
 }
 
-
-.dot.active {
-  background-color: hwb(217 26% 15% / 0.968);
-}
-
-.dotimgnet.active {
-  background-color: hwb(217 26% 15% / 0.968);
-}
-
-.dotonoff.active {
+.dot.active, 
+.dotimgnet.active,
+.dotonoff.active{
   background-color: hwb(217 26% 15% / 0.968);
 }
 
