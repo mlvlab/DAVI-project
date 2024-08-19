@@ -170,7 +170,7 @@ input:checked ~ .slider-switch .off-label {
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 .dataset_radio {
