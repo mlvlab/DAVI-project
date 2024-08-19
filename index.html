@@ -145,7 +145,7 @@
             <source src="./static/videos/DAVI_framework.mp4" type="video/mp4" />
           </video>
           <h2 class="subtitle has-text-centered">
-            <span class="dnerf">DAVI</span>'s the alternative optimization
+            <span class="dnerf">DAVI</span>'s alternative optimization
             procedure.
           </h2>
         </div>
@@ -370,17 +370,17 @@
                 <p id="caption" class="chart-caption">DAVI performs a single-step inference (x20~100 faster).</p>
                 <p>This graph shows the Number of Function Evaluations (NFEs) required for inference, <br>plotted on a logarithmic scale to highlight differences across varying magnitudes.</p>
               </div>
-            <h2></h2>
-            <!-- On/Off Switch -->
-            <div class="switch-container">
-              <label class="switch">
-                <input type="checkbox" id="modeToggle" onchange="toggleMode()">
-                <span class="slider-switch">
-                  <span class="slider-labels">
-                    <span class="on-label">FFHQ</span>
-                    <span class="off-label">ImageNet</span>
-                  </span>
-                </span>
+            <!-- Radio boxes -->
+            <div class="radio-container">
+              <label class="custom-radio">
+                <input type="radio" name="dataset" id="FFHQ" value="FFHQ" checked onclick="toggleMode('FFHQ')">
+                <span class="radio-checkmark"></span>
+                FFHQ
+              </label>
+              <label class="custom-radio">
+                <input type="radio" name="dataset" id="ImageNet" value="ImageNet" onclick="toggleMode('ImageNet')">
+                <span class="radio-checkmark"></span>
+                ImageNet
               </label>
             </div>
             <!--Task Buttons-->
@@ -428,6 +428,54 @@
         </div>
       </div>
     </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="content">
+              <h2 class="title is-3-titleInline">Extensive results of Out-of-distribution</h2>
+            <!-- Radio boxes -->
+            <div class="radio-container">
+              <label class="custom-radio ood">
+                <input type="radio" name="dataset" id="CelebA" value="CelebA" checked onclick="toggleMode_ood('CelebA')">
+                <span class="radio-checkmark"></span>
+                CelebA-HQ
+              </label>
+              <label class="custom-radio ood">
+                <input type="radio" name="dataset" id="GoPro" value="GoPro" onclick="toggleMode_ood('GoPro')">
+                <span class="radio-checkmark"></span>
+                GoPro
+              </label>
+            </div>
+            <!-- Image Pair Container -->
+            <div class="image-comparison-container">
+              <button
+                class="slider-comparison leftside-comparison"
+                onclick="prevImage_ood()"
+              >
+                &#10094;
+              </button>
+              <div class="fixed-comparison" id="fixedImage_ood"></div>
+              <button
+                class="slider-comparison rightside-comparison"
+                onclick="nextImage_ood()"
+              >
+                &#10095;
+              </button>
+            </div>
+            <!-- Dots for navigation -->
+            <div class="dots-navigation">
+              <span class="dotood" onclick="selectImage_ood(0)"></span>
+              <span class="dotood" onclick="selectImage_ood(1)"></span>
+              <span class="dotood" onclick="selectImage_ood(2)"></span>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
     <section class="section" id="BibTeX">
       <div class="container is-max-desktop content">

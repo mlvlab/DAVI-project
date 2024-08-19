@@ -9,6 +9,9 @@ $(document).ready(function () {
   let currentImageIndex_onoff = 0;
   let mode = 'FFHQ';
 
+  let currentImageIndex_ood = 0;
+  let mode_ood = 'CelebA';
+
   const buttons = document.querySelectorAll('.task-button');
   buttons[0].classList.add('active');
 
@@ -296,39 +299,76 @@ $(document).ready(function () {
 
   const tasks_onoff = {
     FFHQ: {
-      0: ['static/images/quality_comparison/ffhq/gauss_deblur/0.png',
-          'static/images/quality_comparison/ffhq/gauss_deblur/1.png',
-          'static/images/quality_comparison/ffhq/gauss_deblur/2.png'],
-      1: ['static/images/quality_comparison/ffhq/sr4/0.png',
+      0: [
+        'static/images/quality_comparison/ffhq/gauss_deblur/0.png',
+        'static/images/quality_comparison/ffhq/gauss_deblur/1.png',
+        'static/images/quality_comparison/ffhq/gauss_deblur/2.png',
+      ],
+      1: [
+        'static/images/quality_comparison/ffhq/sr4/0.png',
         'static/images/quality_comparison/ffhq/sr4/1.png',
-        'static/images/quality_comparison/ffhq/sr4/2.png'],
-      2: ['static/images/quality_comparison/ffhq/boxinpaint/0.png',
+        'static/images/quality_comparison/ffhq/sr4/2.png',
+      ],
+      2: [
+        'static/images/quality_comparison/ffhq/boxinpaint/0.png',
         'static/images/quality_comparison/ffhq/boxinpaint/1.png',
-        'static/images/quality_comparison/ffhq/boxinpaint/2.png'],
-      3: ['static/images/quality_comparison/ffhq/deno/0.png',
+        'static/images/quality_comparison/ffhq/boxinpaint/2.png',
+      ],
+      3: [
+        'static/images/quality_comparison/ffhq/deno/0.png',
         'static/images/quality_comparison/ffhq/deno/1.png',
-        'static/images/quality_comparison/ffhq/deno/2.png'],
-      4: ['static/images/quality_comparison/ffhq/color/0.png',
+        'static/images/quality_comparison/ffhq/deno/2.png',
+      ],
+      4: [
+        'static/images/quality_comparison/ffhq/color/0.png',
         'static/images/quality_comparison/ffhq/color/1.png',
-        'static/images/quality_comparison/ffhq/color/2.png'],    
-      },
+        'static/images/quality_comparison/ffhq/color/2.png',
+      ],
+    },
     ImageNet: {
-      0: ['static/images/quality_comparison/imagenet/gauss_deblur/0.png',
-          'static/images/quality_comparison/imagenet/gauss_deblur/1.png',
-          'static/images/quality_comparison/imagenet/gauss_deblur/2.png'],
-      1: ['static/images/quality_comparison/imagenet/sr4/0.png',
+      0: [
+        'static/images/quality_comparison/imagenet/gauss_deblur/0.png',
+        'static/images/quality_comparison/imagenet/gauss_deblur/1.png',
+        'static/images/quality_comparison/imagenet/gauss_deblur/2.png',
+      ],
+      1: [
+        'static/images/quality_comparison/imagenet/sr4/0.png',
         'static/images/quality_comparison/imagenet/sr4/1.png',
-        'static/images/quality_comparison/imagenet/sr4/2.png'],
-      2: ['static/images/quality_comparison/imagenet/boxinpaint/0.png',
+        'static/images/quality_comparison/imagenet/sr4/2.png',
+      ],
+      2: [
+        'static/images/quality_comparison/imagenet/boxinpaint/0.png',
         'static/images/quality_comparison/imagenet/boxinpaint/1.png',
-        'static/images/quality_comparison/imagenet/boxinpaint/2.png'],
-      3: ['static/images/quality_comparison/imagenet/deno/0.png',
+        'static/images/quality_comparison/imagenet/boxinpaint/2.png',
+      ],
+      3: [
+        'static/images/quality_comparison/imagenet/deno/0.png',
         'static/images/quality_comparison/imagenet/deno/1.png',
-        'static/images/quality_comparison/imagenet/deno/2.png'],
-      4: ['static/images/quality_comparison/imagenet/color/0.png',
+        'static/images/quality_comparison/imagenet/deno/2.png',
+      ],
+      4: [
+        'static/images/quality_comparison/imagenet/color/0.png',
         'static/images/quality_comparison/imagenet/color/1.png',
-        'static/images/quality_comparison/imagenet/color/2.png'],    
-      },
+        'static/images/quality_comparison/imagenet/color/2.png',
+      ],
+    },
+  };
+
+  const tasks_ood = {
+    CelebA: {
+      0: [
+        'static/images/quality_comparison/ood_celeba/0.png',
+        'static/images/quality_comparison/ood_celeba/1.png',
+        'static/images/quality_comparison/ood_celeba/2.png',
+      ],
+    },
+    GoPro: {
+      0: [
+        'static/images/quality_comparison/ood_gopro/0.png',
+        'static/images/quality_comparison/ood_gopro/1.png',
+        'static/images/quality_comparison/ood_gopro/2.png',
+      ],
+    },
   };
 
   function updateImages() {
@@ -391,13 +431,25 @@ $(document).ready(function () {
     $(`.dotonoff:eq(${currentImageIndex_onoff})`).addClass('active');
   }
 
+  function updateImages_ood() {
+    const fixedImage = $('#fixedImage_ood');
+    const currentImages = tasks_ood[mode_ood][0];
+    const currentImage = currentImages[currentImageIndex_ood];
+
+    fixedImage.css('background-image', `url(${currentImage})`);
+
+    // Update dot selection
+    $('.dotood').removeClass('active');
+    $(`.dotood:eq(${currentImageIndex_ood})`).addClass('active');
+  }
+
   function selectTask(taskNumber) {
     currentTask = taskNumber;
     currentImageIndex = 0;
     updateImages();
 
     const buttons = document.querySelectorAll('.task-button');
-    buttons.forEach(button => button.classList.remove('active'));
+    buttons.forEach((button) => button.classList.remove('active'));
     buttons[taskNumber].classList.add('active');
   }
 
@@ -407,7 +459,7 @@ $(document).ready(function () {
     updateImages_imgnet();
 
     const buttons_imgnet = document.querySelectorAll('.task-button_imgnet');
-    buttons_imgnet.forEach(button => button.classList.remove('active'));
+    buttons_imgnet.forEach((button) => button.classList.remove('active'));
     buttons_imgnet[taskNumber].classList.add('active');
   }
 
@@ -417,7 +469,7 @@ $(document).ready(function () {
     updateImages_onoff();
 
     const buttons_onoff = document.querySelectorAll('.task-button_onoff');
-    buttons_onoff.forEach(button => button.classList.remove('active'));
+    buttons_onoff.forEach((button) => button.classList.remove('active'));
     buttons_onoff[taskNumber].classList.add('active');
   }
 
@@ -434,6 +486,11 @@ $(document).ready(function () {
   function selectImage_onoff(index) {
     currentImageIndex_onoff = index;
     updateImages_onoff();
+  }
+
+  function selectImage_ood(index) {
+    currentImageIndex_ood = index;
+    updateImages_ood();
   }
 
   function prevImage() {
@@ -460,6 +517,14 @@ $(document).ready(function () {
     updateImages_onoff();
   }
 
+  function prevImage_ood() {
+    currentImageIndex_ood =
+      currentImageIndex_ood === 0
+        ? tasks_ood[mode_ood][0].length - 1
+        : currentImageIndex_ood - 1;
+    updateImages_ood();
+  }
+
   function nextImage() {
     currentImageIndex =
       currentImageIndex === tasks[currentTask].length - 1
@@ -478,18 +543,31 @@ $(document).ready(function () {
 
   function nextImage_onoff() {
     currentImageIndex_onoff =
-      currentImageIndex_onoff === tasks_onoff[mode][currentTask_onoff].length - 1
+      currentImageIndex_onoff ===
+      tasks_onoff[mode][currentTask_onoff].length - 1
         ? 0
         : currentImageIndex_onoff + 1;
     updateImages_onoff();
   }
 
-  function toggleMode() {
-    mode = mode === 'ImageNet' ? 'FFHQ' : 'ImageNet';
-    $('#modeToggle').text(mode.charAt(0).toUpperCase() + mode.slice(1));
+  function nextImage_ood() {
+    currentImageIndex_ood =
+      currentImageIndex_ood === tasks_ood[mode_ood][0].length - 1
+        ? 0
+        : currentImageIndex_ood + 1;
+    updateImages_ood();
+  }
 
+  function toggleMode(selectedDataset) {
+    mode = selectedDataset;
     currentImageIndex_onoff = 0;
     updateImages_onoff();
+  }
+
+  function toggleMode_ood(selectedDataset) {
+    mode_ood = selectedDataset;
+    currentImageIndex_ood = 0;
+    updateImages_ood();
   }
 
   $('input.slider').on('input change', function (event) {
@@ -530,6 +608,7 @@ $(document).ready(function () {
   updateImages();
   updateImages_imgnet();
   updateImages_onoff();
+  updateImages_ood();
 
   // Slider control with jQuery
   $('input.slider').on('input change', function (event) {
@@ -541,6 +620,12 @@ $(document).ready(function () {
       .css({ 'clip-path': 'inset(0 ' + (100 - pos) + '% 0 0)' });
     element.find('div.slider-handle').css({ left: 'calc(' + pos + '%)' });
   });
+  window.onload = function () {
+    toggleMode('FFHQ');
+  };
+  window.onload = function () {
+    toggleMode_ood('CelebA');
+  };
 
   window.selectTask = selectTask;
   window.prevImage = prevImage;
@@ -557,4 +642,9 @@ $(document).ready(function () {
   window.nextImage_onoff = nextImage_onoff;
   window.selectImage_onoff = selectImage_onoff;
   window.toggleMode = toggleMode;
+
+  window.prevImage_ood = prevImage_ood;
+  window.nextImage_ood = nextImage_ood;
+  window.selectImage_ood = selectImage_ood;
+  window.toggleMode_ood = toggleMode_ood;
 });
