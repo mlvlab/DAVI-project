@@ -173,7 +173,7 @@ input:checked ~ .slider-switch .off-label {
   margin-top: 20px;
 }
 
-.custom-radio {
+.dataset_radio {
   position: relative;
   padding-left: 50px;
   padding-top: 10px;
@@ -190,11 +190,11 @@ input:checked ~ .slider-switch .off-label {
   background-color: rgb(255, 216, 97);
 }
 
-.custom-radio.ood {
+.dataset_radio.ood {
   background-color: rgb(255, 146, 127);
 }
 
-.custom-radio input {
+.dataset_radio input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -212,7 +212,7 @@ input:checked ~ .slider-switch .off-label {
   border-radius: 50%;
 }
 
-.custom-radio input:checked ~ .radio-checkmark:after {
+.dataset_radio input:checked ~ .radio-checkmark:after {
   content: '';
   position: absolute;
   display: block;
@@ -225,15 +225,15 @@ input:checked ~ .slider-switch .off-label {
   background-color: #5cacf8;
 }
 
-.custom-radio input:checked ~ .radio-checkmark {
+.dataset_radio input:checked ~ .radio-checkmark {
   border-color: #5cacf8;
 }
 
-.custom-radio:hover input ~ .radio-checkmark {
+.dataset_radio:hover input ~ .radio-checkmark {
   background-color: #f1f1f1;
 }
 
-.custom-radio:hover input:checked ~ .radio-checkmark {
+.dataset_radio:hover input:checked ~ .radio-checkmark {
   background-color: white;
 }
 

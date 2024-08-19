@@ -622,8 +622,6 @@ $(document).ready(function () {
   });
   window.onload = function () {
     toggleMode('FFHQ');
-  };
-  window.onload = function () {
     toggleMode_ood('CelebA');
   };
 
